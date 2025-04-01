@@ -6,10 +6,10 @@ import { Button } from "./ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
-import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
+import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 const InterviewCard = async ({
-  interviewId,
+  id,
   userId,
   role,
   type,
@@ -17,9 +17,9 @@ const InterviewCard = async ({
   createdAt,
 }: InterviewCardProps) => {
   const feedback =
-    userId && interviewId
+    userId && id
       ? await getFeedbackByInterviewId({
-          interviewId,
+          interviewId: id,
           userId,
         })
       : null;
@@ -93,11 +93,7 @@ const InterviewCard = async ({
 
           <Button className="btn-primary">
             <Link
-              href={
-                feedback
-                  ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
-              }
+              href={feedback ? `/interview/${id}/feedback` : `/interview/${id}`}
             >
               {feedback ? "Check Feedback" : "View Interview"}
             </Link>
